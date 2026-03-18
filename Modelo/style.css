@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.game-board { /* ajustes na div */
+    width: 40%;
+    height: 500px;
+    
+    margin: 0 auto; /* para centralizar a div */
+    position: relative; /* ajusta a posição */
+    overflow: hidden; /* delimitação do espaço */
+    transition: background 10s ease-in-out; /* transição dia, tarde, noite suave */
+   
+    
+   
+}
+
+.pipe { /* ajustes na imagem pipe */
+    position: absolute;
+    bottom: 0;
+    width: 60px;
+    right: -80px;
+    animation: pipe-animation 1.5s infinite linear;
+}
+
+.mario { /* ajustes no mario */
+    width: 70px;
+    position: absolute;
+    bottom: 0;
+   
+}
+
+.jump { /* animação para pular */
+    animation: jump 500ms ease-out; /* 500ms é a duração do pulo, ease-out deixa a queda mais suave */
+}
+
+
+.clouds {
+    position: absolute;
+    width: 300px;
+    bottom: 300px;
+    animation: clouds-animation 30s infinite linear;
+}
+
+.tijolo {
+    position: absolute;
+    width: 300px;
+    bottom: 250px;
+    animation: tijolo-animation 5s linear;
+     animation-iteration-count: 1;
+     animation-fill-mode: forwards;
+}
+
+.moedas {
+    position: absolute;
+    width: 300px;
+    bottom: 280px;
+    animation: tijolo-animation 5s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+   
+}
+.grama {
+ position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 500px; /* ajuste conforme o tamanho da imagem */
+    background-image: url('./img/piso.JPG');
+    background-repeat: repeat-x;
+    background-size: contain;
+    margin: 0 auto; /* para centralizar a div */
+    position: relative; /* ajusta a posição */
+    overflow: hidden; /* delimitação do espaço */
+    z-index: 10; /* garante que fique acima do fundo, mas abaixo de outros elementos */
+}
+
+
+
+
+
+
+@keyframes pipe-animation { /* animação pipe */
+    from {
+        right: -80; /* posição inicial da animação começa fora da tela */
+    }
+    to {
+         right: 100%; /* posição final da animação */
+    }
+}
+
+@keyframes jump { /* definindo tempo do pulo no ar */
+    0% {
+        bottom: 0;
+    }
+    40% {
+        bottom: 180px;
+    }
+    50% {
+        bottom: 180px;
+    }
+    60% {
+        bottom: 180px;
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes clouds-animation {
+    from {
+        right: -300px;
+    }
+
+    to {
+        right: 100%
+    }
+    
+}
+
+@keyframes tijolo-animation {
+    from {
+        right: -300px;
+    }
+
+    to {
+        right: 100%
+    }
+    
+}
+@keyframes moedas-animation {
+    from {
+        right: -300px;
+    }
+
+    to {
+        right: 100%
+    }
+    
+}
+@keyframes tremer {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn { /*animação de entrada */
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  color: #dc3545;
+  font-size: 64px;
+  font-family: 'Press Start 2P', cursive; /* estilo retrô (você precisa importar) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 3px 3px 0 #000, 6px 6px 0 #f7fcfd; /* sombra dupla */
+  z-index: 999;
+  animation: tremer 0.3s infinite, fadeIn 1s ease-in-out;
+ 
+
+
+
+ display: none; /* garante que a tela não apareça ao carregar */}
+
+
+.dia {
+    background: linear-gradient(#87CEEB, #E0F6FF); /* azul claro */
+}
+
+.tarde {
+    background: linear-gradient(#FFA500, #FFDD87); /* laranja/dourado */
+}
+
+.noite {
+    background: linear-gradient(#191970, #000000); /* azul escuro para preto */
+}
+
+#start-button,
+#restart-button {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Arial Black', sans-serif;
+    background: linear-gradient(135deg, #28a745, #218838);
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+#start-button:hover,
+#restart-button:hover {
+    background: linear-gradient(135deg, #34d058, #1e7e34);
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+#restart-button {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+#restart-button:hover {
+    background: linear-gradient(135deg, #e4606d, #a71d2a);
+}
+
+.pausado {
+    animation-play-state: paused !important;
+} /* pausa as animações até que o jogo comece */
+
+.pipe.pausado {
+  animation-play-state: paused !important;
+}
+
+.clouds.pausado {
+  animation-play-state: paused !important;
+}
+
+.tijolo.pausado {
+  animation-play-state: paused !important;
+}
+
+.moedas.pausado {
+   animation-play-state: paused !important;
+}
+
+.game-title {
+   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  color: #1e7e34;
+  font-size: 64px;
+  font-family: 'Press Start 2P', cursive; /* estilo retrô (você precisa importar) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 3px 3px 0 #000, 6px 6px 0 #f7fcfd; /* sombra dupla */
+  z-index: 999;
+
+ 
+  
+  animation: tremer 0.3s infinite, fadeIn 1s ease-in-out;
+}
